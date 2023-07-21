@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordens de Problema</title>
+
+    <link rel="stylesheet" href="/css/CadEquipamento.css">
+    <link rel="stylesheet" href="/css/darkMode.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        if (localStorage.getItem('dark-mode')) {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container-fluid overflow-hidden">
+        <div class="row vh-100 overflow-auto">
+            <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 d-flex sticky-top">
+                <div
+                    class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white sidebar">
+                    <a href="./"
+                        class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5"><img
+                                src="https://companieslogo.com/img/orig/BOSCHLTD.NS-a77682db.png?t=1601681799" alt=""
+                                width="22px" height="22px" style="margin-bottom: 4px;"><span
+                                class="d-none ms-1 align-self-center d-sm-inline text-gradient">Bosch</span></span>
+
+                    </a>
+
+                    <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="./" class="nav-link px-sm-0 px-2">
+                                <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./relatar" class="nav-link px-sm-0 px-2">
+                                <i class="fs-5 bi-exclamation-lg"></i><span class="ms-1 d-none d-sm-inline">Relatar
+                                    problema</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./Ordens" class="nav-link px-sm-0 px-2" <%= ADM == false ? 'hidden' : '' %>>
+                                <i class="fs-5 bi-journal-text"></i><span
+                                    class="ms-1 d-none d-sm-inline">Ordens</span></a>
+                        </li>
+                        <li>
+                            <a href="./Cadatro_Equipamentos" class="nav-link px-sm-0 px-2" <%= ADM == false ? 'hidden' : '' %>>
+                                <i class="fs-5 bi-filter-square"></i><span class="ms-1 d-none d-sm-inline">Cadastrar
+                                    Equipamento </span></a>
+                        </li>
+                        <li>
+                            <label for="switch" class="nav-link px-sm-0 px-4 switch-toggle">
+                                <i class="fs-5 bi-brightness-high-fill"></i><input type="checkbox" id="switch"
+                                    checked /><span class="ms-1 d-none d-sm-inline">Modo</span>
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+                        <a href="" class="d-flex align-items-center text text-decoration-none dropdown-toggle"
+                            id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png"
+                                alt="hugenerd" width="28" height="28" class="rounded-circle">
+
+                            <span class="d-none d-sm-inline mx-1">
+                                <%= user.Nome %>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu text shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="./logout">Sign out</a></li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex flex-column h-sm-100 w-30">
+
+                <main class="row overflow-auto">
+                    <div class="div-img-color-bosch" style="padding: 0%;">
+                        <img src="img/boschcolors.png" alt="cores bosch" class="img-colors">
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                        <h1>Cadastrar equipamento</h1>
+                        <form action="./Cadatro_Equipamentos" method="post">
+
+                            <div class="card w-100">
+                                
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                                            name="Nome" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Quantidade</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            name="Quantidade" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Sala</label>
+                                        <select class="form-select" aria-label="Default select example" name="Sala"
+                                            required>
+                                            <option value="" disabled selected>Selecione uma sala</option>
+                                            <% for (let i=0; i<salas.length; i++) { %>
+                                                <option value='<%= salas[i].IDSala %>'>
+                                                    <%= salas[i].Nome %>
+                                                </option>
+                                                <% } %>
+
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                            name="Descricao"></textarea>
+                                    </div>
+
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button class="btn btn-success" type="submit">Cadastrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </main>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/js/darkMode.js"></script>
+</body>
+
+</html>

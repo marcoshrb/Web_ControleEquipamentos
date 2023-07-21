@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Home</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/darkMode.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <script>
+    if (localStorage.getItem('dark-mode')) {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="container-fluid overflow-hidden">
+    <div class="row vh-100 overflow-auto">
+      <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 d-flex sticky-top">
+        <div
+          class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white sidebar">
+          <a href="./" class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5"><img src="https://companieslogo.com/img/orig/BOSCHLTD.NS-a77682db.png?t=1601681799"
+                alt="" width="22px" height="22px" style="margin-bottom: 4px;"><span
+                class="d-none ms-1 align-self-center d-sm-inline text-gradient">Bosch</span></span>
+          </a>
+
+          <ul
+            class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+            id="menu">
+            <li class="nav-item">
+              <a href="./" class="nav-link px-sm-0 px-2">
+                <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="./relatar" class="nav-link px-sm-0 px-2">
+                <i class="fs-5 bi-exclamation-lg"></i><span class="ms-1 d-none d-sm-inline">Relatar problema</span>
+              </a>
+            </li>
+            <li>
+              <a href="./Ordens" class="nav-link px-sm-0 px-2" <%= ADM == false ? 'hidden' : '' %>>
+                <i class="fs-5 bi-journal-text"></i><span class="ms-1 d-none d-sm-inline">Ordens</span></a>
+            </li>
+            <li>
+              <a href="./Cadatro_Equipamentos" class="nav-link px-sm-0 px-2" <%= ADM == false ? 'hidden' : '' %>>
+                <i class="fs-5 bi-filter-square"></i><span class="ms-1 d-none d-sm-inline">Cadastrar
+                  Equipamento</span></a>
+              
+            </li>
+
+            <li>
+              <label for="switch" class="nav-link px-sm-0 px-4 switch-toggle">
+                <input type="checkbox" id="switch" checked /><i class="fs-5 bi-brightness-high-fill"></i><span
+                  class="ms-1 d-none d-sm-inline">Modo</span>
+              </label>
+            </li>
+
+          </ul>
+          <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+            <a href="#" class="d-flex align-items-center text text-decoration-none dropdown-toggle" id="dropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png" alt="hugenerd" width="28" height="28" class="rounded-circle">
+              <span class="d-none d-sm-inline mx-1">
+                <%= user.Nome %>
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu text shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="./logout">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col d-flex flex-column h-sm-100">
+        <main class="row overflow-auto">
+          <div class="div-img-color-bosch " style="padding: 0%; position: fixed; z-index: 10000;">
+            <img src="img/boschcolors.png" alt="cores bosch" class="img-colors">
+          </div>
+          <div class="d-flex justify-content-center mt-5 mb-3">
+            <form action="/" method="post">
+              <select class="form-select" onchange="this.form.submit()" aria-label="Default select example" name="Sala">
+                <option value="" disabled selected>Selecione uma sala</option>
+                <% for (let i=0; i<salas.length; i++) { %>
+                  <option value=' <%= salas[i].IDSala %> ' <%=id==salas[i].IDSala ? 'selected' : '' %> > <%=
+                      salas[i].Nome %>
+                  </option>
+                  <% } %>
+              </select>
+            </form>
+          </div>
+          <% if (id==1){ %>
+            <div class="d-flex justify-content-center" style="margin-top: 3%;">
+              <h1>Sala Digital</h1>
+            </div>
+
+            <div class="col-12 pt-4">
+              <div class="row">
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card text-center w-100 prof1 ">
+                    <div class="card-body">
+                      <p class="card-text ">
+                      <h5>Prof</h5>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+
+                  <div class="card ms-auto w-25 bancada">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <br>
+                        <br>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div class="row">
+                <br><br><br>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card w-50 text-center aluno1">
+                    <div class="card-body">
+                      <h5 class="card-title">1</h5>
+                    </div>
+                  </div>
+                  <div class="card w-50 text-center aluno2">
+                    <div class="card-body">
+                      <h5 class="card-title">2</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-4 col-md-6 mb-4">
+                </div> -->
+
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+                  <div class="card w-50 text-center aluno3">
+                    <div class="card-body">
+                      <h5 class="card-title">3</h5>
+                    </div>
+                  </div>
+                  <div class="card text-center w-50 aluno4">
+                    <div class="card-body">
+                      <h5 class="card-title">4</h5>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row mb-4">
+
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card w-50 text-center aluno5">
+                    <div class="card-body">
+                      <h5 class="card-title">5</h5>
+                    </div>
+                  </div>
+                  <div class="card w-50 text-center aluno6">
+                    <div class="card-body">
+                      <h5 class="card-title">6</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-4 col-md-6 mb-4">
+                </div> -->
+
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+                  <div class="card w-50 text-center aluno7">
+                    <div class="card-body">
+                      <h5 class="card-title">7</h5>
+                    </div>
+                  </div>
+                  <div class="card text-center w-50 aluno8">
+                    <div class="card-body">
+                      <h5 class="card-title">8</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card w-50 text-center aluno9">
+                    <div class="card-body">
+                      <h5 class="card-title">9</h5>
+                    </div>
+                  </div>
+                  <div class="card w-50 text-center aluno10" data-bs="popover" data-bs-html="true"
+                    data-bs-content="coisa dentro">
+                    <div class="card-body">
+                      <h5 class="card-title">10</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-4 col-md-6 mb-4">
+                </div> -->
+
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+                  <div class="card w-50 text-center aluno11">
+                    <div class="card-body">
+                      <h5 class="card-title">11</h5>
+                    </div>
+                  </div>
+                  <div class="card text-center w-50 aluno12">
+                    <div class="card-body">
+                      <h5 class="card-title">12</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card w-50 text-center aluno13">
+                    <div class="card-body">
+                      <h5 class="card-title">13</h5>
+                    </div>
+                  </div>
+                  <div class="card w-50 text-center aluno14">
+                    <div class="card-body">
+                      <h5 class="card-title">14</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-4 col-md-6 mb-4">
+                </div> -->
+
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+                  <div class="card w-50 text-center aluno15">
+                    <div class="card-body">
+                      <h5 class="card-title">15</h5>
+                    </div>
+                  </div>
+                  <div class="card text-center w-50 aluno16">
+                    <div class="card-body">
+                      <h5 class="card-title">16</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+
+                <div class="col-4 col-md-3 offset-sm-1 d-flex flex-row">
+                  <div class="card w-50 text-center aluno17">
+                    <div class="card-body">
+                      <h5 class="card-title">17</h5>
+                    </div>
+                  </div>
+                  <div class="card w-50 text-center aluno18">
+                    <div class="card-body">
+                      <h5 class="card-title">18</h5>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-4 col-md-3 offset-4 offset-md-4 d-flex flex-row">
+                  <div class="card w-50 text-center aluno19">
+                    <div class="card-body">
+                      <h5 class="card-title">19</h5>
+                    </div>
+                  </div>
+                  <div class="card text-center w-50 aluno20">
+                    <div class="card-body">
+                      <h5 class="card-title">20</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <br>
+              <br>
+              <% } else if (id==2 ) { %>
+                <div class="d-flex justify-content-center" style="margin-top: 3%;">
+                  <h1>Sala ETS</h1>
+                </div>
+
+                <div class="col-12 pt-4">
+                  <div class="row">
+                    <div class="col-4 col-md-3 offset-8 offset-md-8 d-flex flex-row">
+                      <div class="card text-center w-100 prof1 ">
+                        <div class="card-body">
+                          <p class="card-text ">
+                          <h5>Prof</h5>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <br><br><br>
+                  </div>
+
+                  <div class="row mb-5">
+
+                    <div class="col-6 col-md-6 offset-6 offset-sm-5 d-flex flex-row">
+                      <div class="card text-center"style="width: 34%;">
+                        <div class="card-body">
+                          <h5 class="card-title">1</h5>
+                        </div>
+                      </div>
+                      <div class="card text-center" style="width: 33%;">
+                        <div class="card-body">
+                          <h5 class="card-title">2</h5>
+                        </div>
+                      </div>
+                      <div class="card text-center" style="width: 33%;">
+                        <div class="card-body">
+                          <h5 class="card-title">3</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row mb-5">
+
+                    <div class="col-2 offset-6 offset-sm-5 d-flex flex-row">
+                      <div class="card w-100 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">5</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3 col-md-3 offset-1 d-flex flex-row">
+                      <div class="card w-50 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">6</h5>
+                        </div>
+                      </div>
+                      <div class="card w-50 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">7</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="row mb-5">
+
+                    <div class="col-2 offset-6 offset-sm-5 d-flex flex-row">
+                      <div class="card w-100 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">8</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3 col-md-3 offset-1 d-flex flex-row">
+                      <div class="card w-50 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">9</h5>
+                        </div>
+                      </div>
+                      <div class="card w-50 text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">10</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
+                  <% } %>
+
+                    <div>
+                      <div class="row justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-8">
+                          <div class="card" <%= id == '' ? 'hidden' : '' %>>
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Equipamento</th>
+                                      <th scope="col" style="text-align: center;">Total</th>
+                                      <th scope="col"></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% for (let i=0; i < equipamentos.length; i++) { %>
+                                      <tr>
+                                        <th scope="row row-equipamento" value="<%= equipamentos[i].IDEquipamemto %>"
+                                          name="Equip">
+                                          <%= equipamentos[i].Nome %>
+                                        </th>
+                                        <td style="text-align: center;">
+                                          <%= equipamentos[i].Quantidade %>
+                                        </td>
+                                        <div>
+                                          <td>
+                                            <div style="display: flex; justify-content: end;">
+                                              <form action="/solicitar/<%= equipamentos[i].IDEquipamemto %>"
+                                                method="get">
+                                                <button type="submit " class="btn btn-warning mx-1">Solicitar</button>
+                                              </form>
+
+                                              <form action="/excluir/<%= equipamentos[i].IDEquipamemto %>" method="get">
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                              </form>
+                                            </div>
+                                          </td>
+                                        </div>
+                                      </tr>
+                                      <% } %>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <% if (id=="") { %>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          
+                          <% } %>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            
+          </main>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+  <script>
+    const popoverTriggerList = document.querySelectorAll('.text-bg-light')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+    var popoverData = [
+      {
+        selector: '.prof1',
+        title: 'Mesa do Professor',
+        content: '<div class="p-1"><ul style="list-style-type:disc"><li>Professor</li></div>'
+      },
+      {
+        selector: '.aluno1',
+        title: 'Mesa 1',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Luiz Rosa</li>'
+      },
+      {
+        selector: '.aluno2',
+        title: 'Mesa 2',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Guilherme Proença</li>'
+      },
+      {
+        selector: '.aluno3',
+        title: 'Mesa 3',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Ruan  </li>'
+      },
+      {
+        selector: '.aluno4',
+        title: 'Mesa 4',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Murilo</li>'
+      },
+      {
+        selector: '.aluno5',
+        title: 'Mesa 5',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Benhur</li>'
+      },
+      {
+        selector: '.aluno6',
+        title: 'Mesa 6',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Emyli</li>'
+      },
+      {
+        selector: '.aluno7',
+        title: 'Mesa 7',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Matheus</li>'
+      },
+      {
+        selector: '.aluno8',
+        title: 'Mesa 8',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Eric</li>'
+      },
+      {
+        selector: '.aluno9',
+        title: 'Mesa 9',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Eliana</li>'
+      },
+      {
+        selector: '.aluno10',
+        title: 'Mesa 10',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Renato</li>'
+      },
+      {
+        selector: '.aluno11',
+        title: 'Mesa 11',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Anabelly</li>'
+      },
+      {
+        selector: '.aluno12',
+        title: 'Mesa 12',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Maycon Bruno</li>'
+      },
+      {
+        selector: '.aluno13',
+        title: 'Mesa 13',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Felipe</li>'
+      },
+      {
+        selector: '.aluno14',
+        title: 'Mesa 14',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Guilherme Tavares</li>'
+      },
+      {
+        selector: '.aluno15',
+        title: 'Mesa 15',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Viniboy (Verificado)</li>'
+      },
+      {
+        selector: '.aluno16',
+        title: 'Mesa 16',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Luis Gustavo</li>'
+      },
+      {
+        selector: '.aluno17',
+        title: 'Mesa 17',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Marcos</li>'
+      },
+      {
+        selector: '.aluno18',
+        title: 'Mesa 18',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Lander</li>'
+      },
+      {
+        selector: '.aluno19',
+        title: 'Mesa 19',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Meio-Oficial</li>'
+      },
+      {
+        selector: '.aluno20',
+        title: 'Mesa 20',
+        content: '<div class="p-1"<ul style="list-style-type:disc"><li>Meio-Oficial</li>'
+      },
+      // Add more popover data as needed
+    ];
+
+    var popovers = [];
+
+    function createPopover(data) {
+      var popover = new bootstrap.Popover(document.querySelector(data.selector), {
+        container: 'body',
+        placement: 'auto',
+        html: true,
+        title: data.title,
+        content: data.content
+      });
+
+      popover._element.addEventListener('show.bs.popover', function () {
+        hideOtherPopovers(popover);
+      });
+
+      const popoverElement = document.querySelector(data.selector);
+      const btn = popoverElement.querySelector('checkOut')
+
+      document.addEventListener('click', function (event) {
+        var btn = event.target.closest('#checkOut');
+        if (btn) {
+          var popoverContent = btn.closest('button');
+          if (popoverContent) {
+            var popover = popoverContent.parentNode;
+            var selector = popover.querySelector(data.selector);
+            if (selector) {
+              $(selector).removeClass('text-bg-warning text-bg-danger text-bg-light').addClass('text-bg-light');
+            }
+          }
+        }
+      });
+
+
+      popovers.push(popover);
+    }
+
+    function hideOtherPopovers(currentPopover) {
+      popovers.forEach(function (popover) {
+        if (popover !== currentPopover) {
+          popover.hide();
+        }
+      });
+    }
+
+    popoverData.forEach(function (data) {
+      createPopover(data);
+    });
+  </script>
+
+  <script src="/js/darkMode.js"></script>
+
+</body>
+
+</html>
